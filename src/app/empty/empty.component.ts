@@ -14,7 +14,6 @@ export class EmptyComponent implements OnInit {
   ngOnInit(): void {
     this.notificationService.notification$.subscribe((message: string) => {
       this.notificationMessage = message;
-      console.log('Notificación recibida en EmptyComponent:', message);
 
       if (message === 'Consulta realizada.') {
         this.isLoading = true;

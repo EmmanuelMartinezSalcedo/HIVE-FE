@@ -27,8 +27,6 @@ export class VideoListComponent implements OnInit {
         this.responseContent = notification.content;
 
         this.videos = this.responseContent.videoData;
-
-        console.log(this.videos);
       }
     );
   }

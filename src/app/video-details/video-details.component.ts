@@ -31,14 +31,12 @@ export class VideoDetailsComponent implements OnInit {
           const date = parts.slice(2).join('-');
 
           const filePath = `/user/hadoop/Videos/${location}/${camera}/${date}.mp4`;
-          console.log('Ruta completa del video:', filePath);
 
           this.videosService.getVideoFile(filePath).subscribe({
             next: (response) => {
               const videoBlob = response.body;
               if (videoBlob) {
                 const videoUrl = URL.createObjectURL(videoBlob);
-                console.log('URL del video:', videoUrl);
                 this.videoUrl = videoUrl;
               }
             },

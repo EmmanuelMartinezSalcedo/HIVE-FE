@@ -154,13 +154,10 @@ export class HeaderComponent {
       keywords: this.keywords.length > 0 ? this.keywords : [],
     };
 
-    console.log('Filters before sending:', filters);
-
     this.notificationService.sendSearchNotification('Consulta realizada.');
 
     this.videosService.getVideos(filters).subscribe({
       next: (response) => {
-        console.log('Respuesta de videos:', response);
         this.notificationService.sendCompleteNotification(
           'Consulta completada con éxito.'
         );
@@ -171,6 +168,8 @@ export class HeaderComponent {
           'Enviando respuesta',
           response
         );
+
+        // console.log('Respuesta de la API:', response);
       },
       error: (error) => {
         console.error('Error al obtener videos:', error);
