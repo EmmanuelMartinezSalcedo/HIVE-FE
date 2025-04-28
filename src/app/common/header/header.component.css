@@ -1,0 +1,8 @@
+.editable-tag {
+  background: rgb(255, 255, 255);
+  border-style: dashed;
+}
+
+nz-select {
+  width: 200px;
+}

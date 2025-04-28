@@ -1,0 +1,15 @@
+<nz-list nzBordered>
+  @for (video of videos; track video) {
+  <nz-list-item>
+    <nz-list-item-meta nzDescription="{{ video.date }}">
+      <nz-list-item-meta-title>
+        <a href="https://ng.ant.design">{{ video.location | capitalize }}</a>
+      </nz-list-item-meta-title>
+    </nz-list-item-meta>
+
+    <a (click)="goToVideoDetails(video.video_file)">More details</a>
+  </nz-list-item>
+  } @if (videos.length === 0) {
+  <nz-list-empty />
+  }
+</nz-list>

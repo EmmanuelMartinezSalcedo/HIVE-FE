@@ -1,0 +1,115 @@
+<nz-page-header class="shadow-md">
+  <nz-page-header-title>Security Cam Search</nz-page-header-title>
+  <nz-page-header-extra>
+    <nz-space>
+      <nz-select
+        nzShowSearch
+        nzAllowClear
+        *nzSpaceItem
+        nzPlaceHolder="Alert types"
+        [(ngModel)]="selectedAlert"
+        [nzMaxTagCount]="3"
+        nzMode="multiple"
+        [nzMaxTagPlaceholder]="tagPlaceHolder"
+      >
+        @for (alert of alerts; track $index) {
+        <nz-option [nzLabel]="alert | capitalize" [nzValue]="alert"></nz-option>
+        }
+      </nz-select>
+      <ng-template #tagPlaceHolder let-selectedList
+        >and {{ selectedList.length }} more selected</ng-template
+      >
+
+      <nz-select
+        nzShowSearch
+        nzAllowClear
+        *nzSpaceItem
+        nzPlaceHolder="Priority"
+        [(ngModel)]="selectedPriority"
+        [nzMaxTagCount]="3"
+        nzMode="multiple"
+        [nzMaxTagPlaceholder]="tagPlaceHolder"
+      >
+        @for (priority of priorities; track $index) {
+        <nz-option
+          [nzLabel]="priority | capitalize"
+          [nzValue]="priority"
+        ></nz-option>
+        }
+      </nz-select>
+      <ng-template #tagPlaceHolder let-selectedList
+        >and {{ selectedList.length }} more selected</ng-template
+      >
+
+      <nz-select
+        nzShowSearch
+        nzAllowClear
+        *nzSpaceItem
+        nzPlaceHolder="Location"
+        [(ngModel)]="selectedLocation"
+        [nzMaxTagCount]="3"
+        nzMode="multiple"
+        [nzMaxTagPlaceholder]="tagPlaceHolder"
+      >
+        @for (location of locations; track $index) {
+        <nz-option
+          [nzLabel]="location | capitalize"
+          [nzValue]="location"
+        ></nz-option>
+        }
+      </nz-select>
+      <ng-template #tagPlaceHolder let-selectedList
+        >and {{ selectedList.length }} more selected</ng-template
+      >
+
+      <nz-range-picker
+        [(ngModel)]="dateRange"
+        (ngModelChange)="onDatePickerChange($event)"
+        *nzSpaceItem
+        [nzPlaceHolder]="['Fecha inicio', 'Fecha fin']"
+      ></nz-range-picker>
+
+      <nz-time-picker
+        [(ngModel)]="startTime"
+        [nzDefaultOpenValue]="defaultOpenValue"
+        *nzSpaceItem
+        [nzPlaceHolder]="'Hora inicio'"
+      ></nz-time-picker>
+
+      <nz-time-picker
+        [(ngModel)]="endTime"
+        [nzDefaultOpenValue]="defaultOpenValue"
+        *nzSpaceItem
+        [nzPlaceHolder]="'Hora fin'"
+      ></nz-time-picker>
+
+      <button *nzSpaceItem nz-button nzType="primary" (click)="onSubmit()">
+        Buscar
+      </button>
+    </nz-space>
+  </nz-page-header-extra>
+
+  <nz-page-header-content>
+    @for (keyword of keywords; track keyword) {
+    <nz-tag [nzMode]="'closeable'" (nzOnClose)="handleClose(keyword)">
+      {{ sliceTagName(keyword) }}
+    </nz-tag>
+    } @if (!inputVisible) {
+    <nz-tag class="editable-tag" nzNoAnimation (click)="showInput()">
+      <nz-icon nzType="plus" nzTheme="outline" />
+      Nueva palabra clave
+    </nz-tag>
+    } @else {
+    <input
+      #inputElement
+      nz-input
+      nzSize="small"
+      type="text"
+      [(ngModel)]="inputValue"
+      style="width: 78px"
+      (blur)="handleInputConfirm()"
+      (keydown.enter)="handleInputConfirm()"
+    />
+    }
+  </nz-page-header-content>
+</nz-page-header>
