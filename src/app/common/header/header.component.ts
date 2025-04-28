@@ -5,6 +5,7 @@ import { PrioritiesService } from '../../services/priorities.service';
 import { LocationsService } from '../../services/locations.service';
 import { VideosService } from '../../services/videos.service';
 import { NotificationService } from '../../services/notification.service';
+import { Router } from '@angular/router';
 
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
@@ -44,7 +45,8 @@ export class HeaderComponent {
     private prioritiesService: PrioritiesService,
     private locationsService: LocationsService,
     private videosService: VideosService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -132,6 +134,7 @@ export class HeaderComponent {
   }
 
   onSubmit(): void {
+    this.router.navigate(['']);
     const filters = {
       alert_type: this.selectedAlert ? [this.selectedAlert] : [],
       priority: this.selectedPriority ? [this.selectedPriority] : [],
@@ -161,6 +164,8 @@ export class HeaderComponent {
         this.notificationService.sendCompleteNotification(
           'Consulta completada con éxito.'
         );
+
+        this.router.navigate(['/video-details']);
 
         this.notificationService.sendResponseNotification(
           'Enviando respuesta',

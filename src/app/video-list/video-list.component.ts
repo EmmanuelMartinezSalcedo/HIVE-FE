@@ -38,9 +38,14 @@ export class VideoListComponent implements OnInit {
   notificationMessage: any = '';
   isLoading: boolean = false;
 
-  goToVideoDetails(videoFile: string): void {
-    const videoId = videoFile.replace(/\//g, '-').replace('.mp4', '');
-
-    this.router.navigate([`/video-details/${videoId}`]);
+  goToVideoDetails(videoFile: string, index: number): void {
+    if (videoFile) {
+      const videoId = videoFile.replace(/\//g, '-').replace('.mp4', '');
+      this.router.navigate([`/video-details/${videoId}`], {
+        state: { videoDetails: this.videos[index], videoIndex: index },
+      });
+    } else {
+      console.error('video_file is undefined or null:', videoFile);
+    }
   }
 }

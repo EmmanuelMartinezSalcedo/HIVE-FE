@@ -1,1 +1,20 @@
-<app-header></app-header>
+<div class="flex h-screen">
+  <!-- Mitad izquierda: Video -->
+  <div class="w-1/2 flex justify-center items-center">
+    @if (videoUrl) {
+    <video [src]="videoUrl" controls class="max-h-96"></video>
+    } @else{
+    <nz-spin nzSimple nzSize="large"></nz-spin>
+    }
+  </div>
+
+  <!-- Mitad derecha: Lista -->
+  <div class="w-1/2 p-4">
+    <h2 class="text-xl font-bold mb-4">Detalles del Video</h2>
+    @if (videoDetails) {
+    <pre>{{ videoDetails | json }}</pre>
+    } @else{
+    <nz-spin nzSimple nzSize="large"></nz-spin>
+    }
+  </div>
+</div>
